@@ -1,0 +1,11 @@
+framework module ActiveconnectiOS {
+  umbrella header "ActiveconnectiOS.h"
+
+  export *
+  module * { export * }
+}
+
+module ActiveconnectiOS.Swift {
+    header "ActiveconnectiOS-Swift.h"
+    requires objc
+}

@@ -1,0 +1,362 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target arm64-apple-ios13.6 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ActiveconnectiOS
+import AVFoundation
+import AVKit
+@_exported import ActiveconnectiOS
+import CommonCrypto
+import CoreBluetooth
+import Foundation
+import LocalAuthentication
+import Swift
+import UIKit
+import Vision
+import os.log
+import os
+@objc public protocol ACAuthenticationDelegate {
+  @objc func didAuthenticate()
+  @objc func didFailToAuthenticate(error: Swift.Error?)
+}
+@objc @_inheritsConvenienceInitializers open class ACAuthenticationViewController : UIKit.UIViewController, ActiveconnectiOS.ACAcceptanceViewControllerDelegate, ActiveconnectiOS.ACOSViewControllerDelegate, ActiveconnectiOS.ACFacialViewControllerDelegate, ActiveconnectiOS.ACProximityViewControllerDelegate {
+  public var authenticationRequest: ActiveconnectiOS.ACAuthenticationRequest?
+  public var mobileDevice: ActiveconnectiOS.ACMobileDevice?
+  @objc @IBInspectable public var authenticationDelegate: ActiveconnectiOS.ACAuthenticationDelegate?
+  @objc @IBInspectable open var acceptanceBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var acceptanceNibName: Swift.String?
+  @objc @IBInspectable open var osBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var osNibName: Swift.String?
+  @objc @IBInspectable open var facialBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var facialNibName: Swift.String?
+  @objc @IBInspectable open var proximityBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var proximityNibName: Swift.String?
+  @objc @IBInspectable open var statusBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var statusNibName: Swift.String?
+  @objc @IBInspectable open var authenticatingBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var authenticatingNibName: Swift.String?
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  open func didAuthenticate()
+  open func didFailToAuthenticate()
+  @objc public func didAcceptRequest()
+  @objc public func didRejectRequest()
+  public func didFinishAuthentication(result: ActiveconnectiOS.OS_Auth_Result)
+  @objc public func didDetectFaces(faces: [Swift.String])
+  @objc public func didCancelFaceDetection()
+  @objc public func didFailDetectFaces(error: Swift.Error?)
+  @objc public func didDetectProximity(code: Swift.String, rssi: Swift.Int, desktop: Swift.String)
+  @objc public func didCancelProximityDetection()
+  @objc public func didFailDetectProximity(error: Swift.Error?)
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+@objc public protocol ACFacialViewControllerDelegate : AnyObject {
+  @objc func didDetectFaces(faces: [Swift.String])
+  @objc func didCancelFaceDetection()
+  @objc func didFailDetectFaces(error: Swift.Error?)
+}
+@objc @_hasMissingDesignatedInitializers public class ACFacialViewController : ActiveconnectiOS.ACCaptureFaceViewController {
+  public var facialDelegate: ActiveconnectiOS.ACFacialViewControllerDelegate?
+  public var numFaces: Swift.UInt
+  public init?(delegate: ActiveconnectiOS.ACFacialViewControllerDelegate, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc override dynamic public func viewDidLoad()
+  @objc @IBAction public func onCancel(_ sender: Any)
+  @objc override dynamic public func didReceiveMemoryWarning()
+  public func didCaptureFace(face: CoreGraphics.CGImage)
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+@objc public protocol ACTrainingDelegate {
+  @objc func didCompleteTraining(identifier: Any?, device: ActiveconnectiOS.ACMobileDevice)
+  @objc func didFailToCompleteTraining(identifier: Any?, device: ActiveconnectiOS.ACMobileDevice, error: Swift.Error?)
+}
+@objc @_inheritsConvenienceInitializers open class ACTrainingViewController : UIKit.UIViewController {
+  @objc @IBInspectable open var facialBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var facialNibName: Swift.String?
+  @objc @IBInspectable open var instructionsBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var instructionsNibName: Swift.String?
+  @objc @IBInspectable open var statusBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var statusNibName: Swift.String?
+  @objc @IBInspectable open var busyBundleIdentifier: Swift.String?
+  @objc @IBInspectable open var busyNibName: Swift.String?
+  @objc @IBInspectable open var trainingDelegate: ActiveconnectiOS.ACTrainingDelegate?
+  public var device: ActiveconnectiOS.ACMobileDevice?
+  public var identifier: Any?
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  open func trainingComplete()
+  open func trainingFailed()
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension ACTrainingViewController : ActiveconnectiOS.ACFacialViewControllerDelegate {
+  @objc dynamic public func didDetectFaces(faces: [Swift.String])
+  @objc dynamic public func didCancelFaceDetection()
+  @objc dynamic public func didFailDetectFaces(error: Swift.Error?)
+}
+extension ACTrainingViewController : ActiveconnectiOS.ACTrainingRequiredViewControllerDelegate {
+  public func StartTraining()
+}
+public class ACAuthenticationRequest : Swift.Codable {
+  final public let user_id: Swift.Int
+  final public let application_name: Swift.String
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+open class ACSessionStatus : Swift.Decodable {
+  final public let userID: Swift.Int
+  final public let applicationID: Swift.String
+  final public let applicationName: Swift.String
+  final public let authRequestID: Swift.String
+  final public let status: ActiveconnectiOS.SessionStatus
+  final public let durationSeconds: Swift.Double
+  public var duration: Swift.String {
+    get
+  }
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+public protocol ACNotificationHandlerDelegate {
+  func presentAuthenticationUI(request: ActiveconnectiOS.ACAuthenticationRequest, device: ActiveconnectiOS.ACMobileDevice)
+  func sessionStatusChanged(status: ActiveconnectiOS.ACSessionStatus)
+}
+public class ACNotificationHandler {
+  public struct NotificationHandlerResult {
+    public let suggestedCompletionResult: UIKit.UIBackgroundFetchResult
+    public let activeconnectNotification: Swift.Bool
+  }
+  public init(delegate: ActiveconnectiOS.ACNotificationHandlerDelegate?)
+  public func processNotification(userInfo: [Swift.AnyHashable : Any], registeredDevices: [ActiveconnectiOS.ACMobileDevice]) -> ActiveconnectiOS.ACNotificationHandler.NotificationHandlerResult
+  @objc deinit
+}
+public enum OS_Auth_Result {
+  case Success
+  case Failed
+  case Cancelled
+  case NotSupported
+  public static func == (a: ActiveconnectiOS.OS_Auth_Result, b: ActiveconnectiOS.OS_Auth_Result) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public protocol ACOSViewControllerDelegate : AnyObject {
+  func didFinishAuthentication(result: ActiveconnectiOS.OS_Auth_Result)
+}
+@objc @_hasMissingDesignatedInitializers public class ACOSViewController : UIKit.UIViewController {
+  @objc @IBInspectable public var unlockMessage: Swift.String
+  public init?(delegate: ActiveconnectiOS.ACOSViewControllerDelegate, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class ACCaptureFaceViewController : UIKit.UIViewController {
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension ACCaptureFaceViewController {
+  @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
+}
+extension ACCaptureFaceViewController : AVFoundation.AVCaptureVideoDataOutputSampleBufferDelegate {
+  @objc dynamic public func captureOutput(_ output: AVFoundation.AVCaptureOutput, didOutput sampleBuffer: CoreMedia.CMSampleBuffer, from connection: AVFoundation.AVCaptureConnection)
+}
+public struct ActiveconnectConfiguration {
+  public let server_url: Foundation.URL
+  public static let DEFAULT_ACTIVECONNECT_CONFIGURATION: ActiveconnectiOS.ActiveconnectConfiguration
+  public static let DEVELOPMENT_ACTIVECONNECT_CONFIGURATION: ActiveconnectiOS.ActiveconnectConfiguration
+  public init(server_url: Foundation.URL)
+}
+public class ManagementAPI {
+  public init(application_id: Swift.String, application_secret: Swift.String, activeconnect_configuration: ActiveconnectiOS.ActiveconnectConfiguration = ActiveconnectConfiguration.DEFAULT_ACTIVECONNECT_CONFIGURATION)
+  public func create_user_and_register_device(user: Swift.String, notification_token: Swift.String, success: @escaping ActiveconnectiOS.ACMobileDevice.device_success_proc, failure: @escaping ActiveconnectiOS.ACMobileDevice.device_failure_proc)
+  public func add_users(users: [Swift.String], success: @escaping ([Swift.String], [Swift.String]) -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  public func add_user(user: Swift.String, success: @escaping () -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  public func delete_users(users: [Swift.String], success: @escaping () -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  public func delete_user(user: Swift.String, success: @escaping () -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  public func get_registration_link(user_id: Swift.String, display_name: Swift.String?, success: @escaping (Foundation.URL) -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  public func has_registered_mobile_device(user_id: Swift.String, success: @escaping (Swift.Bool) -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  @objc deinit
+}
+public class ACActiveSession : Swift.Decodable {
+  final public let created: Foundation.Date
+  final public let status: ActiveconnectiOS.SessionStatus
+  final public let id: Swift.String
+  public var device: ActiveconnectiOS.ACMobileDevice?
+  required public init(from decoder: Swift.Decoder) throws
+  public func close(success: @escaping () -> Swift.Void, failure: @escaping (Swift.Error?) -> Swift.Void)
+  @objc deinit
+}
+@objc public protocol ACProximityViewControllerDelegate : AnyObject {
+  @objc func didDetectProximity(code: Swift.String, rssi: Swift.Int, desktop: Swift.String)
+  @objc func didCancelProximityDetection()
+  @objc func didFailDetectProximity(error: Swift.Error?)
+}
+@objc @_hasMissingDesignatedInitializers public class ACProximityViewController : UIKit.UIViewController, ActiveconnectiOS.ProximityDelegate {
+  @objc @IBInspectable public var proximityDelegate: ActiveconnectiOS.ACProximityViewControllerDelegate?
+  public var serviceID: Swift.String
+  public var characteristicID: Swift.String
+  public var timeoutSeconds: Swift.Int
+  public var powerThreshold: Swift.Int
+  public init?(delegate: ActiveconnectiOS.ACProximityViewControllerDelegate, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  public func didDetectProximity(desktopDevice: Swift.String, proximityCode: Swift.String, rssi: Swift.Int)
+  public func didFailToDetectProximity(error: Swift.Error?)
+  public func deviceTooFarAway()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+@objc public protocol ACAcceptanceViewControllerDelegate : AnyObject {
+  @objc func didAcceptRequest()
+  @objc func didRejectRequest()
+}
+@objc open class ACAcceptanceViewController : UIKit.UIViewController {
+  @objc @IBOutlet public var acceptanceDelegate: ActiveconnectiOS.ACAcceptanceViewControllerDelegate!
+  public init?(delegate: ActiveconnectiOS.ACAcceptanceViewControllerDelegate, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc @IBOutlet weak public var acceptButton: UIKit.UIButton!
+  @objc @IBOutlet weak public var rejectButton: UIKit.UIButton!
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+public protocol ACTrainingRequiredViewControllerDelegate {
+  func StartTraining()
+}
+@objc open class ACTrainingRequiredViewController : UIKit.UIViewController {
+  public init?(delegate: ActiveconnectiOS.ACTrainingRequiredViewControllerDelegate, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc override dynamic open func viewDidLoad()
+  @objc @IBAction public func onStart(_ sender: Any)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+public protocol ProximityDelegate {
+  func didDetectProximity(desktopDevice: Swift.String, proximityCode: Swift.String, rssi: Swift.Int)
+  func didFailToDetectProximity(error: Swift.Error?)
+  func deviceTooFarAway()
+}
+@objc public class ProximityDetector : ObjectiveC.NSObject, CoreBluetooth.CBPeripheralManagerDelegate {
+  public init(delegate: ActiveconnectiOS.ProximityDelegate)
+  public func detectProximity(serviceID: Swift.String, characteristicID: Swift.String, timeoutSeconds: Swift.Int, powerThresholdDB: Swift.Int)
+  @objc public func peripheralManagerDidUpdateState(_ peripheral: CoreBluetooth.CBPeripheralManager)
+  @objc public func peripheralManager(_ peripheral: CoreBluetooth.CBPeripheralManager, didReceiveWrite requests: [CoreBluetooth.CBATTRequest])
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum ACError : Foundation.LocalizedError {
+  case Success
+  case Invalid_Registration_Link
+  case Expired_Registration_Link
+  case Duplicate_Device
+  case Existing_Mobile_Device
+  case Failed_Register_Device
+  case Failed_Unregister_Device
+  case Device_Not_Found
+  case Failed_Update_Device
+  case User_Exists
+  case Failed_Add_User
+  case Failed_Delete_User
+  case Failed_Get_Sessions
+  case Failed_Close_Session
+  case Failed_Get_Pending_Requests
+  case Failed_Create_Payload
+  case Invalid_Parameter
+  case Unexpected_Response_Code
+  case Unexpected_Response_Data
+  case Unexpected_Response_Type
+  case InvalidCredentials
+  case InvalidURL
+  case OperationFailed
+  case Error
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: ActiveconnectiOS.ACError, b: ActiveconnectiOS.ACError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers @objc open class ACMobileDevice : ObjectiveC.NSObject, Swift.Codable {
+  open var training_required: Swift.Bool {
+    get
+  }
+  public typealias device_success_proc = (Any, ActiveconnectiOS.ACMobileDevice) -> Swift.Void
+  public typealias device_failure_proc = (Any, Swift.Error) -> Swift.Void
+  public static func registerDevice(identifier: Any, registration_link: Foundation.URL, notification_token: Swift.String, success: @escaping ActiveconnectiOS.ACMobileDevice.device_success_proc, failure: @escaping ActiveconnectiOS.ACMobileDevice.device_failure_proc)
+  open func unregister(identifier: Any, success: @escaping (Any) -> Swift.Void, failure: @escaping (Any, Swift.Error) -> Swift.Void)
+  open func update(identifier: Any, notification_token: Swift.String, success: @escaping (Any, ActiveconnectiOS.ACMobileDevice) -> Swift.Void, failure: @escaping (Any, Swift.Error) -> Swift.Void)
+  public func trainingComplete()
+  @objc deinit
+  @objc override dynamic public init()
+  required public init(from decoder: Swift.Decoder) throws
+  open func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class Device : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class Service : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class ServiceUrls : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class Training : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class Facial : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class User : Swift.Codable {
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public enum SessionStatus : Swift.String {
+  case active
+  case paused
+  case closed
+  case pending
+  case identifying
+  case failed
+  case time_out
+  case unknown
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc open class ACBusyViewController : UIKit.UIViewController {
+  public init?(message: Swift.String?, bundleIdentifier: Swift.String?, nibName: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+extension ActiveconnectiOS.OS_Auth_Result : Swift.Equatable {}
+extension ActiveconnectiOS.OS_Auth_Result : Swift.Hashable {}
+extension ActiveconnectiOS.ACError : Swift.Equatable {}
+extension ActiveconnectiOS.ACError : Swift.Hashable {}
+extension ActiveconnectiOS.SessionStatus : Swift.Equatable {}
+extension ActiveconnectiOS.SessionStatus : Swift.Hashable {}
+extension ActiveconnectiOS.SessionStatus : Swift.RawRepresentable {}
