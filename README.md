@@ -20,7 +20,7 @@ The first stage in inetgrating Activeconnect into your applicaton is to create a
 ## Installation
 To integrate ActiveconnectiOS into your xCode project using CocoaPods, specify it in your `podfile`.
 ```
-pod 'ActiveconnectiOS', '~>0.1.0'
+pod 'ActiveconnectiOS', '~>0.2.0'
 ```
 
 ## Getting Started
