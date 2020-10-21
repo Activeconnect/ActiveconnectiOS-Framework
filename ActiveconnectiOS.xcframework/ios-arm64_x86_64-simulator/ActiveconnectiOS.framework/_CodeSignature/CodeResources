@@ -6,39 +6,39 @@
 	<dict>
 		<key>ACAcceptanceViewController.nib</key>
 		<data>
-		bSR6dl2bwvGQqPRLZZfAyTARgCo=
+		ArhXppnWUFdV6/7TSs/LXU/5W/Q=
 		</data>
 		<key>ACBusyViewController.nib</key>
 		<data>
-		JlJRsz1GMBO0RkQpBkvb1Dwmg7o=
+		EvL6Xw+3rKgYZMpnw4erwR/PNUo=
 		</data>
 		<key>ACCaptureFaceViewController.nib</key>
 		<data>
-		xtFv95GBZEaoagJxq3TIHQKJRv4=
+		3fiYkbAuA203aZPHaWnxUmjQHv4=
 		</data>
 		<key>ACFacialViewController.nib</key>
 		<data>
-		4uKU+cFcerfdNvlnwMqnLnjKRqM=
+		WbCr9HIjMCtI/xXVOZnEfbb1Fic=
 		</data>
 		<key>ACOSViewController.nib</key>
 		<data>
-		PjJN8ui3tYCLiV8bpPfPHi39AVQ=
+		Db6gttxtXBhilB63TuFr5vX5cs0=
 		</data>
 		<key>ACProximityViewController.nib</key>
 		<data>
-		vRI/6xg3cB6iCLfhcaFWQ7f+BNM=
+		oSYA7VE0suSJ502+G4WT+zdj6Oo=
 		</data>
 		<key>ACStatusViewController.nib</key>
 		<data>
-		3HXoO3O68kFGqL1u5R05I6HyHuk=
+		fVnmWL950Lxk5aMANrvWxJ8Z93A=
 		</data>
 		<key>ACTrainingRequiredViewController.nib</key>
 		<data>
-		QlJY71Dhrhizfjg+19mYfTngu+E=
+		Bjn0axeu13m78ueyKTrzsWAoWec=
 		</data>
 		<key>ACTrainingViewController.nib</key>
 		<data>
-		vwu9orK/5Nlsp/J2W4Qs/KgyuWA=
+		CCoWlbYqsoe8qZl8ceyvtqjUOTs=
 		</data>
 		<key>Activeconnect.storyboardc/Info.plist</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2ckG0hOd7Lyb+Q4fkV7NHyBicq4=
+		hIwR1vufhSq0kU94+YWmFxJLK+w=
 		</data>
 		<key>Localizable.strings</key>
 		<data>
@@ -123,63 +123,63 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			G/jedm7cT7R2LQLTb2uYb3WSwFezJGqX4rgvow+Y47U=
+			qYKJhFOTehH3NIJ4+Jts7mgcPAPkgs9HpethvN7njQQ=
 			</data>
 		</dict>
 		<key>ACBusyViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gv6aNcVyNEm4fry/DhjDY1vQ31vtFY18/yKGvKA2icY=
+			0AJScs/WaOlZMyWjFlm19sMSJTamkwHcSLb73Mj6iME=
 			</data>
 		</dict>
 		<key>ACCaptureFaceViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			++irYZKb1OOSrv6qfBg4cKlxupd0jmzA1GZvcKGU0WA=
+			aCWU2rI0sAvjP6we2LhKsD0h53YnVMCqe+KXD7wXA1Y=
 			</data>
 		</dict>
 		<key>ACFacialViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xUtMltU87HlIsqPidVz2fCVTgl58mSsPlE1qpR6POnY=
+			Ol7mqhMk9ZZk1+A+hqWROaiMHiBnhaYxlusUDldXhrg=
 			</data>
 		</dict>
 		<key>ACOSViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			npGaS8aFPPamhgBG1BZdDGNu6zETQOZu1fgvNIsnpyo=
+			BNk4iy3laep3mvmM7JnCNyqJYn5z4afw/1FsZyWVcwU=
 			</data>
 		</dict>
 		<key>ACProximityViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dPiwHQw+qgtCEq/lv0hGzhAmFCFvaKeehh1I52AFQxI=
+			p38urb2G6RnLxZHtqzq7CEYoRsscdmGc2Stj3IDEkLo=
 			</data>
 		</dict>
 		<key>ACStatusViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nnF5gnoB4cfmjKnEsujVrudP12ud19d+L6EwKJdTlfA=
+			0iXzqAZQ1u5/N55jI3+S1Lsp/uzbkiatogfSNBK+c9g=
 			</data>
 		</dict>
 		<key>ACTrainingRequiredViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UH/VKJTHkMrHkGek1gs9QQ/3S5K/ttoTEWFlKv6pSTA=
+			c+PP3e3+FUtaWt1iLad9gttI8AXcOiXC3fJCsoF54NI=
 			</data>
 		</dict>
 		<key>ACTrainingViewController.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bTiQh5ou95W2ccBOOjnMyOlCxgIg0BznxoGwYlezP6Q=
+			OZn1iX2yiguG/nE8Xq0NIVYFPOaxjzSBJ2FLD7Audb0=
 			</data>
 		</dict>
 		<key>Activeconnect.storyboardc/Info.plist</key>

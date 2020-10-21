@@ -9,7 +9,7 @@ This framework allows custom iOS Applications to:
 The easiest way to integrate Activeconnect into your application is to use [CocoaPods](https://cocoapods.org).
 To integrate ActiveconnectiOS into your xCode project using CocoaPods, specify it in your `podfile`.
 ```
-pod 'ActiveconnectiOS', '~>0.1.0'
+pod 'ActiveconnectiOS', '~>0.2.1'
 ```
 
 ## Getting Started
